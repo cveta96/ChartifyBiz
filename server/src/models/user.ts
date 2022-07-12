@@ -1,11 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface IUser {
-  username: string;
-  password: string;
-  email: string;
-  status: string;
-}
+import { IUser } from "../interfaces/user";
 
 const UserSchema: Schema = new Schema({
   username: {
@@ -25,6 +19,9 @@ const UserSchema: Schema = new Schema({
   status: {
     type: String,
     required: true,
+  },
+  refreshtoken: {
+    type: String,
   },
 });
 

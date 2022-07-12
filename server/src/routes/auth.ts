@@ -20,4 +20,18 @@ router.post(
   auth.registerUser
 );
 
+// @route    POST api/auth/login
+// @desc     Authenticate user and get jwt
+// @access   Public
+router.post(
+  "/login",
+  [
+    check("email", "Please include a valid email.").isEmail(),
+    check("password", "Password must be 6 or more characters long.").isLength({
+      min: 6,
+    }),
+  ],
+  auth.loginUser
+);
+
 export = router;
