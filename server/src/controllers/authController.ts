@@ -50,13 +50,13 @@ const registerUser = async (
     user.refreshtoken = refreshToken;
     await user.save();
 
-    jwt.sign(payload, secretJWT, { expiresIn: "6h" }, (err, token) => {
+    jwt.sign(payload, secretJWT, { expiresIn: "6h" }, (err, accessToken) => {
       if (err) throw err;
       res.cookie("jwt", refreshToken, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       });
-      res.json({ token });
+      res.json({ accessToken });
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -100,13 +100,13 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     user.refreshtoken = refreshToken;
     await user.save();
 
-    jwt.sign(payload, secretJWT, { expiresIn: "6h" }, (err, token) => {
+    jwt.sign(payload, secretJWT, { expiresIn: "6h" }, (err, accessToken) => {
       if (err) throw err;
       res.cookie("jwt", refreshToken, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       });
-      res.json({ token });
+      res.json({ accessToken });
     });
   } catch (error) {
     if (error instanceof Error) {
